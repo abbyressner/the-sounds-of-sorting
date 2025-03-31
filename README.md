@@ -12,4 +12,3 @@
 *   [Sorting Algorithms](https://en.wikipedia.org/wiki/Sorting_algorithm) (cited in project  manual) - to find an additional comparison-based sorting algorithm
 *   [Strand sort](https://en.wikipedia.org/wiki/Strand_sort) - for help implementing my chosen sorting algorithm (linked on Wikipedia page above)
 *   [TTAP Chapter 8: Sorting and Searching](https://grinnell.instructure.com/courses/316/files/11330?wrap=1) - for help implementing my sorting algorithms
-*   
