@@ -1,9 +1,11 @@
-package edu.grinnell.csc207.soundsofsorting;
+package edu.grinnell.csc207.soundsofsorting.rendering;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
+
+import edu.grinnell.csc207.soundsofsorting.audio.NoteIndices;
 
 /**
  * A drawing panel for visualizing the contents of a @NoteIndices object.

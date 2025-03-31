@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import edu.grinnell.csc207.soundsofsorting.sortevents.CompareEvent;
-import edu.grinnell.csc207.soundsofsorting.sortevents.CopyEvent;
-import edu.grinnell.csc207.soundsofsorting.sortevents.SortEvent;
-import edu.grinnell.csc207.soundsofsorting.sortevents.SwapEvent;
+import edu.grinnell.csc207.soundsofsorting.events.CompareEvent;
+import edu.grinnell.csc207.soundsofsorting.events.CopyEvent;
+import edu.grinnell.csc207.soundsofsorting.events.SortEvent;
+import edu.grinnell.csc207.soundsofsorting.events.SwapEvent;
 
 /**
  * A collection of sorting algorithms.

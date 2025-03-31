@@ -9,8 +9,11 @@ import java.util.TimerTask;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
-
-import edu.grinnell.csc207.soundsofsorting.sortevents.SortEvent;
+import edu.grinnell.csc207.soundsofsorting.audio.NoteIndices;
+import edu.grinnell.csc207.soundsofsorting.audio.Scale;
+import edu.grinnell.csc207.soundsofsorting.events.CompareEvent;
+import edu.grinnell.csc207.soundsofsorting.events.SortEvent;
+import edu.grinnell.csc207.soundsofsorting.rendering.ArrayPanel;
 import edu.grinnell.csc207.soundsofsorting.sorts.Sorts;
 
 /**
@@ -135,16 +138,14 @@ public class ControlPanel extends JPanel {
                 }
                 isSorting = true;
                 
-                // TODO: fill me in!
-                // 1. Create the sorting events list
-                // 2. Add in the compare events to the end of the list
+                Integer[] original = java.util.Arrays.copyOf(notes.getNotes(), notes.getNotes().length);
+
                 List<SortEvent<Integer>> events = new java.util.LinkedList<>();
                 
-                // NOTE: The Timer class repetitively invokes a method at a
-                //       fixed interval.  Here we are specifying that method
-                //       by creating an _anonymous subclass_ of the TimeTask
-                //       class. You can interpret the run() method as the
-                //       method that fires on every "tick" of the program.
+                for (int i = 0; i < original.length - 1; i++) {
+                    events.add(new CompareEvent<>(i, i + 1));
+                }
+
                 Timer timer = new Timer();
                 timer.schedule(new TimerTask() {
                     private int index = 0;
@@ -152,12 +153,15 @@ public class ControlPanel extends JPanel {
                     @Override
                     public void run() {
                         if (index < events.size()) {
-                            SortEvent<Integer> e = events.get(index++);
-                            // TODO: fill me in!
-                            // 1. Apply the next sort event.
-                            // 3. Play the corresponding notes denoted by the
-                            //    affected indices logged in the event.
-                            // 4. Highlight those affected indices.
+                            SortEvent<Integer> event = events.get(index++);
+
+                            event.apply(notes.getNotes());
+                            notes.clearAllHighlighted();
+                            for (Integer idx : event.getAffectedIndices()) {
+                                notes.highlightNote(idx);
+                                int midi = scale.getNoteValue(notes.getNotes()[idx]);
+                                scale.playNote(midi);
+                            }
                             panel.repaint();
                         } else {
                             this.cancel();

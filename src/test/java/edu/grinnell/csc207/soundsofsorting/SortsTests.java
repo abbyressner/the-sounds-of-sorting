@@ -6,8 +6,7 @@ import java.util.function.Consumer;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
-
-import edu.grinnell.csc207.soundsofsorting.sortevents.SortEvent;
+import edu.grinnell.csc207.soundsofsorting.events.SortEvent;
 import edu.grinnell.csc207.soundsofsorting.sorts.Sorts;
 
 public class SortsTests {

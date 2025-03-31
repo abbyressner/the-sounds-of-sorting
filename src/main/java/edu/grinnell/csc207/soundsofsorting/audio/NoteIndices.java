@@ -1,4 +1,4 @@
-package edu.grinnell.csc207.soundsofsorting;
+package edu.grinnell.csc207.soundsofsorting.audio;
 
 import java.util.Collections;
 
