@@ -10,7 +10,7 @@ public class NoteIndices {
      * @param n the size of the scale object that these indices map into
      */
     public NoteIndices(int n) {
-        // TODO: fill me in!
+        
     }
     
     /**
