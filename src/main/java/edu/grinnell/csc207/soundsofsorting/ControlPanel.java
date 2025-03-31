@@ -63,6 +63,8 @@ public class ControlPanel extends JPanel {
                 return Sorts.mergeSort(arr);
             case ("Quick"):
                 return Sorts.quickSort(arr);
+            case ("Strand"):
+                return Sorts.strandSort(arr);
             default:
                 throw new IllegalArgumentException("generateEvents");
         }
@@ -114,7 +116,8 @@ public class ControlPanel extends JPanel {
             "Insertion",
             "Bubble",
             "Merge",
-            "Quick"
+            "Quick",
+            "Strand"
         });
         add(sorts);
 
@@ -148,15 +151,8 @@ public class ControlPanel extends JPanel {
                     return;
                 }
                 isSorting = true;
-
-                Integer[] original = java.util.Arrays.copyOf(notes.getNotes(), notes.getNotes().length);
-
-                List<SortEvent<Integer>> events = new java.util.LinkedList<>();
-
-                for (int i = 0; i < original.length - 1; i++) {
-                    events.add(new CompareEvent<>(i, i + 1));
-                }
-
+                Integer[] originalNotes = java.util.Arrays.copyOf(notes.getNotes(), notes.getNotes().length);
+                List<SortEvent<Integer>> events = generateEvents((String) sorts.getSelectedItem(), originalNotes);
                 Timer timer = new Timer();
                 timer.schedule(new TimerTask() {
                     private int index = 0;
@@ -164,14 +160,12 @@ public class ControlPanel extends JPanel {
                     @Override
                     public void run() {
                         if (index < events.size()) {
-                            SortEvent<Integer> e = events.get(index++);
-                            e.apply(notes.getNotes());
-                            List<Integer> indexes = e.getAffectedIndices();
+                            SortEvent<Integer> event = events.get(index++);
+                            event.apply(notes.getNotes());
                             notes.clearAllHighlighted();
-
-                            for (int i = 0; i < indexes.size(); i++) {
-                                scale.playNote(indexes.get(i), e.isEmphasized());
-                                notes.highlightNote(indexes.get(i));
+                            for (Integer idx : event.getAffectedIndices()) {
+                                notes.highlightNote(idx);
+                                scale.playNote(notes.getNotes()[idx], event.isEmphasized());
                             }
                             panel.repaint();
                         } else {
