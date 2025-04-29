@@ -96,15 +96,20 @@ public class Sorts {
         List<SortEvent<T>> events = new ArrayList<>();
 
         for (int i = 1; i < arr.length; i++) {
+            T key = arr[i];
             int j = i - 1;
-            while (j >= 0 && arr[j].compareTo(arr[i]) > 0) {
+            while (j >= 0) {
                 events.add(new CompareEvent<>(j, j + 1));
-                arr[j + 1] = arr[j];
-                events.add(new CopyEvent<>(j + 1, arr[j]));
-                j--;
+                if (arr[j].compareTo(key) > 0) {
+                    arr[j + 1] = arr[j];
+                    events.add(new CopyEvent<>(j + 1, arr[j]));
+                    j--;
+                } else {
+                    break;
+                }
             }
-            arr[j + 1] = arr[i];
-            events.add(new CopyEvent<>(j + 1, arr[i]));
+            arr[j + 1] = key;
+            events.add(new CopyEvent<>(j + 1, key));
         }
         return events;
     }
@@ -163,7 +168,6 @@ public class Sorts {
             j++;
         }
 
-        // Copy the merged result back into the original array
         for (int k = 0; k < temp.size(); k++) {
             arr[lo + k] = temp.get(k);
             events.add(new CopyEvent<>(lo + k, temp.get(k)));
