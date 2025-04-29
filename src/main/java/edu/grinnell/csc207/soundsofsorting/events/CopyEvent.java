@@ -11,6 +11,12 @@ public class CopyEvent<T> implements SortEvent<T> {
     private int index;
     private T value;
 
+    /**
+     * Constructs a new CopyEvent.
+     *
+     * @param index the index to copy into
+     * @param value the value to copy
+     */
     public CopyEvent(int index, T value) {
         this.index = index;
         this.value = value;

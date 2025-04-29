@@ -127,7 +127,8 @@ public class Sorts {
         return events;
     }
 
-    private static <T extends Comparable<? super T>> void mergeSortHelper(T[] arr, int lo, int hi, List<SortEvent<T>> events) {
+    private static <T extends Comparable<? super T>> 
+        void mergeSortHelper(T[] arr, int lo, int hi, List<SortEvent<T>> events) {
         if (hi - lo <= 1) {
             return;
         }
@@ -138,7 +139,8 @@ public class Sorts {
         merge(arr, lo, mid, hi, events);
     }
 
-    private static <T extends Comparable<? super T>> void merge(T[] arr, int lo, int mid, int hi, List<SortEvent<T>> events) {
+    private static <T extends Comparable<? super T>> 
+        void merge(T[] arr, int lo, int mid, int hi, List<SortEvent<T>> events) {
         List<T> temp = new ArrayList<>();
         int i = lo;
         int j = mid;
@@ -187,7 +189,8 @@ public class Sorts {
         return events;
     }
 
-    private static <T extends Comparable<? super T>> void quickSortHelper(T[] arr, int lo, int hi, List<SortEvent<T>> events) {
+    private static <T extends Comparable<? super T>> 
+        void quickSortHelper(T[] arr, int lo, int hi, List<SortEvent<T>> events) {
         if (lo < hi) {
             int pivot = partition(arr, lo, hi, events);
             quickSortHelper(arr, lo, pivot - 1, events);
@@ -195,7 +198,8 @@ public class Sorts {
         }
     }
 
-    private static <T extends Comparable<? super T>> int partition(T[] arr, int lo, int hi, List<SortEvent<T>> events) {
+    private static <T extends Comparable<? super T>> 
+        int partition(T[] arr, int lo, int hi, List<SortEvent<T>> events) {
         T pivot = arr[hi];
         int i = lo - 1;
 
@@ -249,7 +253,8 @@ public class Sorts {
         return events;
     }
 
-    private static <T extends Comparable<? super T>> List<T> mergeLists(List<T> list1, List<T> list2, List<SortEvent<T>> events) {
+    private static <T extends Comparable<? super T>> 
+        List<T> mergeLists(List<T> list1, List<T> list2, List<SortEvent<T>> events) {
         List<T> result = new ArrayList<>();
         int i = 0;
         int j = 0;
