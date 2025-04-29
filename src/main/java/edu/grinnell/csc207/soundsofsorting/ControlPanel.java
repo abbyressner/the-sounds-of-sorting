@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 
 import edu.grinnell.csc207.soundsofsorting.audio.NoteIndices;
 import edu.grinnell.csc207.soundsofsorting.audio.Scale;
-import edu.grinnell.csc207.soundsofsorting.events.CompareEvent;
 import edu.grinnell.csc207.soundsofsorting.events.SortEvent;
 import edu.grinnell.csc207.soundsofsorting.rendering.ArrayPanel;
 import edu.grinnell.csc207.soundsofsorting.sorts.Sorts;
@@ -151,8 +150,10 @@ public class ControlPanel extends JPanel {
                     return;
                 }
                 isSorting = true;
-                Integer[] originalNotes = java.util.Arrays.copyOf(notes.getNotes(), notes.getNotes().length);
-                List<SortEvent<Integer>> events = generateEvents((String) sorts.getSelectedItem(), originalNotes);
+                Integer[] originalNotes = java.util.Arrays.copyOf(notes.getNotes(), 
+                                                                  notes.getNotes().length);
+                List<SortEvent<Integer>> events = generateEvents((String) sorts.getSelectedItem(), 
+                                                                 originalNotes);
                 Timer timer = new Timer();
                 timer.schedule(new TimerTask() {
                     private int index = 0;
@@ -170,6 +171,7 @@ public class ControlPanel extends JPanel {
                             panel.repaint();
                         } else {
                             this.cancel();
+                            notes.clearAllHighlighted();
                             panel.repaint();
                             isSorting = false;
                         }
